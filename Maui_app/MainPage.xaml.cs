@@ -1,64 +1,50 @@
 ﻿
-
-namespace Notes;
+namespace TipCalculator;
 
 public partial class MainPage : ContentPage
 {
-    string _fileName = Path.Combine(FileSystem.AppDataDirectory, "notes.txt");
-
     public MainPage()
     {
         InitializeComponent();
-                editor = this.FindByName<Editor>("editor");
 
+        billInput.TextChanged += (s, e) => CalculateTip(false, false);
+        roundDown.Clicked += (s, e) => CalculateTip(false, true);
+        roundUp.Clicked += (s, e) => CalculateTip(true, false);
 
-        if (File.Exists(_fileName))
+        tipPercentSlider.ValueChanged += (s, e) =>
         {
-            editor.Text = File.ReadAllText(_fileName);
-        }
-    
-
-    var notesHeading = new Label() { Text = "Notes", HorizontalOptions = LayoutOptions.Center, FontAttributes = FontAttributes.Bold };
-
-        var buttonsGrid = new Grid() { HeightRequest = 40.0 };
-        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1.0, GridUnitType.Auto) });
-        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30.0, GridUnitType.Absolute) });
-        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1.0, GridUnitType.Auto) });
-
-        var saveButton = new Button() { WidthRequest = 100, Text = "Save" };
-        saveButton.Clicked += OnSaveButtonClicked;
-        Grid.SetColumn(saveButton, 0);
-        buttonsGrid.Children.Add(saveButton);
-
-        var deleteButton = new Button() { WidthRequest = 100, Text = "Delete" };
-        deleteButton.Clicked += OnDeleteButtonClicked;
-        Grid.SetColumn(deleteButton, 2);
-        buttonsGrid.Children.Add(deleteButton);
-
-        var stackLayout = new VerticalStackLayout
-        {
-            Padding = new Thickness(30, 60, 30, 30),
-            Children = { notesHeading, editor, buttonsGrid }
+            double pct = Math.Round(e.NewValue);
+            tipPercent.Text = pct + "%";
+            CalculateTip(false, false);
         };
-
-        this.Content = stackLayout;
     }
 
-    private void OnSaveButtonClicked(object sender, EventArgs e)
+    void CalculateTip(bool roundUp, bool roundDown)
     {
-        File.WriteAllText(_fileName, editor.Text);
-        DisplayAlert("Success", "Note saved!", "OK");
-    }
-
-    private void OnDeleteButtonClicked(object sender, EventArgs e)
-    {
-        if (File.Exists(_fileName))
+        double t;
+        if (Double.TryParse(billInput.Text, out t) && t > 0)
         {
-            File.Delete(_fileName);
-            editor.Text = string.Empty;
-            DisplayAlert("Deleted", "Note deleted!", "OK");
+            double pct = Math.Round(tipPercentSlider.Value);
+            double tip = Math.Round(t * (pct / 100.0), 2);
+
+            double final = t + tip;
+
+            if (roundUp)
+            {
+                final = Math.Ceiling(final);
+                tip = final - t;
+            }
+            else if (roundDown)
+            {
+                final = Math.Floor(final);
+                tip = final - t;
+            }
+
+            tipOutput.Text = tip.ToString("C");
+            totalOutput.Text = final.ToString("C");
         }
     }
+
+    void OnNormalTip(object sender, EventArgs e) { tipPercentSlider.Value = 15; }
+    void OnGenerousTip(object sender, EventArgs e) { tipPercentSlider.Value = 20; }
 }
-
-
