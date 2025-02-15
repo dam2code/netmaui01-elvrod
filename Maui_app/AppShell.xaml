@@ -10,6 +10,6 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:StandardTipPage}"
-        Route="MainPage" />
+        Route="StandardTipPage" />
 
 </Shell>

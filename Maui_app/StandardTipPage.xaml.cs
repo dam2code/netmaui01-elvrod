@@ -39,6 +39,6 @@ public partial class StandardTipPage : ContentPage
 
     async void GotoCustom(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(TipCalculator));
+        await Shell.Current.GoToAsync(nameof(MainPage));
     }
 }
