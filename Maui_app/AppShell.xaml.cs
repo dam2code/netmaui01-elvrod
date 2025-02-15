@@ -1,4 +1,6 @@
-﻿namespace Maui_app
+﻿using TipCalculator;
+
+namespace Maui_app
 {
     public partial class AppShell : Shell
     {
@@ -6,6 +8,9 @@
         {
             //comentario
             InitializeComponent();
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+
+            Application.Current.UserAppTheme = AppTheme.Light;
         }
     }
 }
