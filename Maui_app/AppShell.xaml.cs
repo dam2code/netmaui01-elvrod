@@ -1,6 +1,4 @@
-﻿using Maui_app.Pages;
-
-namespace Maui_app
+﻿namespace Maui_app
 {
     public partial class AppShell : Shell
     {
@@ -8,8 +6,6 @@ namespace Maui_app
         {
             //comentario
             InitializeComponent();
-            Routing.RegisterRoute("astronomicalbodydetails", typeof(AstronomicalBodyPage));
-
         }
     }
 }
