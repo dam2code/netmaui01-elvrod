@@ -8,9 +8,7 @@ namespace Maui_app
         {
             //comentario
             InitializeComponent();
-            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-
-            Application.Current.UserAppTheme = AppTheme.Light;
+          
         }
     }
 }
