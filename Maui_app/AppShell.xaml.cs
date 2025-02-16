@@ -1,4 +1,4 @@
-﻿using TipCalculator;
+﻿using Maui_app.Pages;
 
 namespace Maui_app
 {
@@ -8,7 +8,8 @@ namespace Maui_app
         {
             //comentario
             InitializeComponent();
-          
+            Routing.RegisterRoute("astronomicalbodydetails", typeof(AstronomicalBodyPage));
+
         }
     }
 }

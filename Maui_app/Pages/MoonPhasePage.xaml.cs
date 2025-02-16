@@ -1,4 +1,4 @@
-using Astronomy;
+﻿using Astronomy;
 
 namespace Maui_app.Pages;
 
@@ -34,13 +34,13 @@ public partial class MoonPhasePage : ContentPage
 
     static Dictionary<MoonPhaseCalculator.Phase, string> moonPhaseEmojis = new Dictionary<MoonPhaseCalculator.Phase, string>
         {
-            { MoonPhaseCalculator.Phase.New, "??" },
-            { MoonPhaseCalculator.Phase.WaxingCrescent, "??" },
-            { MoonPhaseCalculator.Phase.FirstQuarter, "??" },
-            { MoonPhaseCalculator.Phase.WaxingGibbous, "??" },
-            { MoonPhaseCalculator.Phase.Full, "??" },
-            { MoonPhaseCalculator.Phase.WaningGibbous, "??" },
-            { MoonPhaseCalculator.Phase.LastQuarter, "??" },
-            { MoonPhaseCalculator.Phase.WaningCrescent, "??" },
+            { MoonPhaseCalculator.Phase.New, "🌅" },
+            { MoonPhaseCalculator.Phase.WaxingCrescent, "🌒" },
+            { MoonPhaseCalculator.Phase.FirstQuarter, "🌓" },
+            { MoonPhaseCalculator.Phase.WaxingGibbous, "🌔" },
+            { MoonPhaseCalculator.Phase.Full, "🌕" },
+            { MoonPhaseCalculator.Phase.WaningGibbous, "🌖" },
+            { MoonPhaseCalculator.Phase.LastQuarter, "🌗" },
+            { MoonPhaseCalculator.Phase.WaningCrescent, "🌘" },
         };
 }
