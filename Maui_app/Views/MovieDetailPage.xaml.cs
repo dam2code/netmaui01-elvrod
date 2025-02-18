@@ -2,9 +2,9 @@ namespace Maui_app.Views;
 
 public partial class MovieDetailPage : ContentPage
 {
-    public MovieDetailPage(ViewModels.MovieViewModel movie)
+    public MovieDetailPage()
     {
-        BindingContext = App.MainViewModel.SelectedMovie;
+        BindingContext = App.MainViewModel?.SelectedMovie;
         InitializeComponent();
     }
 }

@@ -1,15 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Maui_app.ViewModels;
 
 public class MovieListViewModel : ObservableObject
 {
+    private MovieViewModel? _selectedMovie;
+
+    public MovieViewModel? SelectedMovie
+    {
+        get => _selectedMovie;
+        set => SetProperty(ref _selectedMovie, value);
+    }
+
     public ObservableCollection<MovieViewModel> Movies { get; set; }
 
-    public MovieListViewModel() =>
+    public MovieListViewModel()
+    {
         Movies = [];
-        private MovieViewModel _selectedMovie;
+        DeleteMovieCommand = new Command<MovieViewModel>(DeleteMovie);
+    }
 
     public async Task RefreshMovies()
     {
@@ -22,11 +33,5 @@ public class MovieListViewModel : ObservableObject
     public void DeleteMovie(MovieViewModel movie) =>
         Movies.Remove(movie);
 
-
-
-    public MovieViewModel SelectedMovie
-    {
-        get => _selectedMovie;
-        set => SetProperty(ref _selectedMovie, value);
-    }
+    public ICommand DeleteMovieCommand { get; private set; }
 }
