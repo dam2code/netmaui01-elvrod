@@ -1,7 +1,4 @@
-﻿using Maui_app.Models;
-using System.Collections.Generic;
-
-namespace Maui_app;
+﻿namespace Maui_app;
 
 public partial class MainPage : ContentPage
 {
@@ -11,20 +8,14 @@ public partial class MainPage : ContentPage
         InitializeComponent();
     }
 
-    public async void OnNewButtonClicked(object sender, EventArgs args)
+    private async void btnRefresh_Clicked(object sender, EventArgs e)
     {
-        statusMessage.Text = "";
+        btnRefresh.IsEnabled = false;
+        actIsBusy.IsRunning = true;
 
-        await App.PersonRepo.AddNewPerson(newPerson.Text);
-        statusMessage.Text = App.PersonRepo.StatusMessage;
+        BindingContext = await Services.WeatherServer.GetWeather(txtPostalCode.Text);
+
+        btnRefresh.IsEnabled = true;
+        actIsBusy.IsRunning = false;
     }
-
-    public async void OnGetButtonClicked(object sender, EventArgs args)
-    {
-        statusMessage.Text = "";
-
-        List<Person> people = await App.PersonRepo.GetAllPeople();
-        peopleList.ItemsSource = people;
-    }
-
 }

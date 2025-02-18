@@ -4,8 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Maui_app"
+
     Shell.FlyoutBehavior="Disabled"
-    Title="Maui_app">
+    Title="What's the weather like?">
 
     <ShellContent
         Title="Home"

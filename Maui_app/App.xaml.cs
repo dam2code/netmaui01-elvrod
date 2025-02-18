@@ -2,18 +2,20 @@
 
 public partial class App : Application
 {
-    public static PersonRepository PersonRepo { get; private set; }
-
-    public App(PersonRepository personRepo) // Recibir la instancia inyectada
+    public App()
     {
         InitializeComponent();
 
-        // Asignar la instancia inyectada a la propiedad estática
-        PersonRepo = personRepo;
+        Routing.RegisterRoute(nameof(Maui_app.MainPage), typeof(Maui_app.MainPage));
     }
 
-    protected override Window CreateWindow(IActivationState activationState)
+    protected override Window CreateWindow(IActivationState? activationState)
     {
-        return new Window(new AppShell());
+        var window = new Window(new AppShell());
+#if WINDOWS
+        window.Width = 500;
+        window.Height = 300;
+#endif
+        return window;
     }
 }
